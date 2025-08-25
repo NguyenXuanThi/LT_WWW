@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+    <welcome-file-list>
+        <welcome-file>Bai5.html</welcome-file>
+        <welcome-file>Bai4.html</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+
+    <context-param>
+        <param-name>Name</param-name>
+        <param-value>Xuan Dat</param-value>
+    </context-param>
+    <context-param>
+        <param-name>Email</param-name>
+        <param-value>XuanDat28804@gmail.com</param-value>
+    </context-param>
+
+    <servlet>
+        <servlet-name>ContextServlet</servlet-name>
+        <servlet-class>iuh.fit.se.ltwww_tuan01.Bai4</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ContextServlet</servlet-name>
+        <url-pattern>/bai-4</url-pattern>
+    </servlet-mapping>
+</web-app>
+
+
