@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="scripts/style.css">
+</head>
+<body>
+<form action="registration-form" name="formDangKy" method="GET">
+    <div>
+        <label >First name</label>
+        <input type="text" id="txtFName" name="txtFName" maxlength="30" pattern="[a-zA-Z\s]+" title="Only letters a-z or A-Z" required>
+    </div>
+    <div>
+        <label for="txtLName">Last name</label>
+        <input type="text" id="txtLName" name="txtLName" maxlength="30" pattern="[a-zA-Z\s]+" title="Only letters a-z or A-Z" required>
+    </div>
+    <div>
+        <label>Date of birth</label>
+        <select name="day" required>
+            <option value="">Day:</option>
+            <!-- Day options 1-31 -->
+            <script>
+                for(let i=1; i<=31; i++) {
+                    document.write('<option value="'+i+'">'+i+'</option>');
+                }
+            </script>
+        </select>
+        <select name="month" required>
+            <option value="">Month:</option>
+            <option value="January">January</option>
+            <option value="February">February</option>
+            <option value="March">March</option>
+            <option value="April">April</option>
+            <option value="May">May</option>
+            <option value="June">June</option>
+            <option value="July">July</option>
+            <option value="August">August</option>
+            <option value="September">September</option>
+            <option value="October">October</option>
+            <option value="November">November</option>
+            <option value="December">December</option>
+        </select>
+        <select name="year" required>
+            <option value="">Year:</option>
+            <!-- Year options, ví dụ từ 1950 đến 2025 -->
+            <script>
+                for(let y=1950; y<=2025; y++) {
+                    document.write('<option value="'+y+'">'+y+'</option>');
+                }
+            </script>
+        </select>
+    </div>
+    <div>
+        <label for="txtEmail">Email</label>
+        <input type="email" id="txtEmail" name="txtEmail" required>
+    </div>
+    <div>
+        <label for="txtMobileNumber">Mobile number</label>
+        <input type="text" id="txtMobileNumber" name="txtMobileNumber" pattern="\d{10}" title="10 digit number" required>
+    </div>
+    <div>
+        <label>Gender</label>
+        <input type="radio" id="male" name="gender" value="Male" required><label for="male">Male</label>
+        <input type="radio" id="female" name="gender" value="Female"><label for="female">Female</label>
+    </div>
+    <div>
+        <label for="txtAddress">Address</label>
+        <textarea id="txtAddress" name="txtAddress" ></textarea>
+    </div>
+    <div>
+        <label for="txtCity">City</label>
+        <input type="text" id="txtCity" name="txtCity" maxlength="30" pattern="[a-zA-Z\s]+" title="Only letters a-z or A-Z" >
+    </div>
+    <div>
+        <label for="txtPinCode">Pin code</label>
+        <input type="text" id="txtPinCode" name="txtPinCode" pattern="\d{6}" title="6 digit number" >
+    </div>
+    <div>
+        <label for="txtState">State</label>
+        <input type="text" id="txtState" name="txtState" maxlength="30" pattern="[a-zA-Z\s]+" title="Only letters a-z or A-Z" >
+    </div>
+    <div>
+        <label for="txtCountry">Country</label>
+        <input type="text" id="txtCountry" name="txtCountry" value="India" >
+    </div>
+    <div class="hobbies">
+        <label>Hobbies</label>
+        <input type="checkbox" id="drawing" name="chkHobbies" value="Drawing"><label for="drawing">Drawing</label>
+        <input type="checkbox" id="singing" name="chkHobbies" value="Singing"><label for="singing">Singing</label>
+        <input type="checkbox" id="dancing" name="chkHobbies" value="Dancing"><label for="dancing">Dancing</label>
+        <input type="checkbox" id="sketching" name="chkHobbies" value="Sketching"><label for="sketching">Sketching</label>
+        <input type="checkbox" id="others" name="chkHobbies" value="Others"><label for="others">Others</label>
+        <input type="text" name="txtOthersHobby" placeholder="Specify if others">
+    </div>
+
+    <fieldset style="margin-top: 15px; width: 650px;">
+        <legend>Qualification</legend>
+        <table class="qualification-table">
+            <thead>
+            <tr>
+                <th>Sl.No. Examination</th>
+                <th>Board</th>
+                <th>Percentage</th>
+                <th>Year of Passing</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Class X</td>
+                <td><input type="text" name="txtBoardX" maxlength="10"></td>
+                <td><input type="text" name="txtPercentX" pattern="^\d{1,2}(\.\d{1,2})?$" title="Up to 2 decimal places"></td>
+                <td><input type="text" name="txtYearX" pattern="\d{4}" maxlength="4"></td>
+            </tr>
+            <tr>
+                <td>Class XII</td>
+                <td><input type="text" name="txtBoardXII" maxlength="10"></td>
+                <td><input type="text" name="txtPercentXII" pattern="^\d{1,2}(\.\d{1,2})?$" title="Up to 2 decimal places"></td>
+                <td><input type="text" name="txtYearXII" pattern="\d{4}" maxlength="4"></td>
+            </tr>
+            <tr>
+                <td>Graduation</td>
+                <td><input type="text" name="txtBoardGrad" maxlength="10"></td>
+                <td><input type="text" name="txtPercentGrad" pattern="^\d{1,2}(\.\d{1,2})?$" title="Up to 2 decimal places"></td>
+                <td><input type="text" name="txtYearGrad" pattern="\d{4}" maxlength="4"></td>
+            </tr>
+            <tr>
+                <td>Masters</td>
+                <td><input type="text" name="txtBoardMasters" maxlength="10"></td>
+                <td><input type="text" name="txtPercentMasters" pattern="^\d{1,2}(\.\d{1,2})?$" title="Up to 2 decimal places"></td>
+                <td><input type="text" name="txtYearMasters" pattern="\d{4}" maxlength="4"></td>
+            </tr>
+            </tbody>
+        </table>
+    </fieldset>
+
+    <div class="course-options" style="margin-top: 15px;">
+        <label>Course applies for</label>
+        <input type="radio" id="bca" name="txtCourse" value="BCA" required><label for="bca">BCA</label>
+        <input type="radio" id="bcom" name="txtCourse" value="B.Com"><label for="bcom">B.Com</label>
+        <input type="radio" id="bsc" name="txtCourse" value="B.Sc"><label for="bsc">B.Sc</label>
+        <input type="radio" id="ba" name="txtCourse" value="B.A"><label for="ba">B.A</label>
+    </div>
+
+    <div class="form-buttons">
+        <input type="submit" value="Submit">
+        <input type="reset" value="Reset">
+    </div>
+</form>>
+</body>
+</html>
