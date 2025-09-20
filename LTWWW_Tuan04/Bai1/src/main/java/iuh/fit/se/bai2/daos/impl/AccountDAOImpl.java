@@ -59,7 +59,7 @@ public class AccountDAOImpl {
             ps.setString(4, acc.getPassword());
 
             if (acc.getBirthDate() != null) {
-                ps.setDate(5, Date.valueOf(acc.getBirthDate())); // yyyy-MM-dd
+                ps.setDate(5, Date.valueOf(acc.getBirthDate()));
             } else {
                 ps.setNull(5, Types.DATE);
             }

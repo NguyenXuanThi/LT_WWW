@@ -15,7 +15,6 @@ import java.time.LocalDate;
 
 @WebServlet("/account-servlet")
 public class AccountServlet extends HttpServlet {
-
     @Resource(name = "jdbc/userdb")   // lấy DataSource đã khai báo trong context.xml
     private DataSource dataSource;
 
@@ -35,7 +34,7 @@ public class AccountServlet extends HttpServlet {
         String fname = request.getParameter("txtFName");
         String lname = request.getParameter("txtLName");
         String email = request.getParameter("txtEmail");
-        String password = request.getParameter("password");
+        String password = request.getParameter("txtPass");
         String day = request.getParameter("day");
         String month = request.getParameter("month");
         String year = request.getParameter("year");
