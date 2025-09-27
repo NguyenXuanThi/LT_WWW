@@ -1,0 +1,12 @@
+<Context>
+    <Resource name="jdbc/QuanLyDienThoaiDS"
+              auth="Container"
+              type="javax.sql.DataSource"
+              maxTotal="20"
+              maxIdle="10"
+              maxWaitMillis="-1"
+              username="root"
+              password="123456"
+              driverClassName="org.mariadb.jdbc.Driver"
+              url="jdbc:mariadb://localhost:3306/QUANLYDIENTHOAI"/>
+</Context>
