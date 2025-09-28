@@ -74,4 +74,34 @@
         <property name="name" value="${class_}"/>
     </bean>
 
+    <bean id="faculty" class="iuh.fit.se.beans.autowiring.Faculty">
+        <property name="id" value="FI"/>
+        <property name="name" value="Khoa Cong Nghe Thong Tin"/>
+    </bean>
+
+    <bean id="faculty2" class="iuh.fit.se.beans.autowiring.Faculty2">
+        <property name="id" value="dfgdhdfghdfg"/>
+        <property name="name" value="Khoa Marketing"/>
+    </bean>
+
+    <bean id="dept1" class="iuh.fit.se.beans.autowiring.Department" autowire="no">
+        <property name="id" value="DP1"/>
+        <property name="name" value="Department 1"/>
+        <property name="faculty" ref="faculty"/>
+    </bean>
+
+    <bean id="dept2" class="iuh.fit.se.beans.autowiring.Department" autowire="byName">
+        <property name="id" value="DP2"/>
+        <property name="name" value="Department 2"/>
+    </bean>
+
+    <bean id="dept3" class="iuh.fit.se.beans.autowiring.Department2" autowire="byType">
+        <property name="id" value="DP3"/>
+        <property name="name" value="Department 3"/>
+    </bean>
+
+    <bean id="dept4" class="iuh.fit.se.beans.autowiring.Department" autowire="constructor">
+        <property name="id" value="DP4"/>
+        <property name="name" value="Department 4"/>
+    </bean>
 </beans>
