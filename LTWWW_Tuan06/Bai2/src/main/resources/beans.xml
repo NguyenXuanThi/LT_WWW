@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Bean Address -->
+    <bean id="address1" class="iuh.fit.se.bai2.beans.xmlbased.Address">
+        <property name="city" value="Hanoi"/>
+        <property name="state" value="HN"/>
+        <property name="country" value="Vietnam"/>
+    </bean>
+
+    <!-- Bean Employee sử dụng Setter DI -->
+    <bean id="employee1" class="iuh.fit.se.bai2.beans.xmlbased.Employee">
+        <property name="id" value="1"/>
+        <property name="name" value="Nguyen Van A"/>
+        <property name="address" ref="address1"/>
+    </bean>
+
+    <!-- Bean Employee sử dụng Constructor DI -->
+    <bean id="employee2" class="iuh.fit.se.bai2.beans.xmlbased.Employee">
+        <constructor-arg value="2"/>
+        <constructor-arg value="Tran Thi B"/>
+        <constructor-arg ref="address1"/>
+    </bean>
+
+</beans>
