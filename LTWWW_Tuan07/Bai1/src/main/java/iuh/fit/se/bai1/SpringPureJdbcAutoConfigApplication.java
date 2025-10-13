@@ -18,17 +18,17 @@ public class SpringPureJdbcAutoConfigApplication {
     @Bean
     CommandLineRunner runner(EmployeeDAO employeeDAO) {
         return args -> {
-            Employee employee = new Employee(8, "Nguyen Van A", "Super Admin");
-            employeeDAO.save(employee);
+//            Employee employee = new Employee(8, "Nguyen Van A", "Super Admin");
+//            employeeDAO.save(employee);
 
-            List<Employee> employees = employeeDAO.getAll();
-            employees.forEach(System.out::print);
+//            List<Employee> employees = employeeDAO.getAll();
+//            employees.forEach(System.out::print);
 
-            Employee employee2 = employeeDAO.getById(1);
+            Employee employee2 = employeeDAO.getById(8);
             System.out.println(employee2);
 
-//            Employee employeeDirectMapper = employeeDAO.getByIdDirectMapper(1);
-//            System.out.println(employeeDirectMapper);
+            Employee employeeDirectMapper = employeeDAO.getByIdDirectMapper(1);
+            System.out.println(employeeDirectMapper);
         };
     }
 }

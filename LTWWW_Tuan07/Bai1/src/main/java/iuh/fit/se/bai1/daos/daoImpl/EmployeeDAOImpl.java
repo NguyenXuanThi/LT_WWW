@@ -2,99 +2,79 @@ package iuh.fit.se.bai1.daos.daoImpl;
 
 import iuh.fit.se.bai1.daos.EmployeeDAO;
 import iuh.fit.se.bai1.entities.Employee;
+import iuh.fit.se.bai1.entities.EmployeeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
-@Repository
+@Component
 public class EmployeeDAOImpl implements EmployeeDAO {
-    private DataSource dataSource;
+    private JdbcTemplate jdbcTemplate;
     @Autowired
     public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
     @Override
     public void save(Employee employee) {
         String sql = "INSERT INTO employee (id, name, role) VALUES (?, ?, ?)";
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, employee.getId());
-            ps.setString(2, employee.getName());
-            ps.setString(3, employee.getRole());
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public Employee getById(int id) {
-        String sql = "SELECT * FROM employee WHERE id = ?";
-        Employee employee = null;
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                employee = new Employee(
-                        rs.getInt("id"),
-                        rs.getString("name"),
-                        rs.getString("role")
-                );
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return employee;
-    }
-
-    @Override
-    public List<Employee> getAll() {
-        String sql = "SELECT * FROM employee";
-        List<Employee> list = new ArrayList<>();
-        try (Connection conn = dataSource.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-            while (rs.next()) {
-                list.add(new Employee(
-                        rs.getInt("id"),
-                        rs.getString("name"),
-                        rs.getString("role")
-                ));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return list;
+        jdbcTemplate.update(sql, employee.getId(), employee.getName(), employee.getRole());
     }
 
     @Override
     public void update(Employee employee) {
         String sql = "UPDATE employee SET name=?, role=? WHERE id=?";
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, employee.getName());
-            ps.setString(2, employee.getRole());
-            ps.setInt(3, employee.getId());
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        jdbcTemplate.update(sql, employee.getName(), employee.getRole(), employee.getId());
     }
 
     @Override
     public void deleteById(int id) {
         String sql = "DELETE FROM employee WHERE id=?";
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, id);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        jdbcTemplate.update(sql, id);
     }
+
+//    Query row(s) with Rows Mapper
+    @Override
+    public Employee getByIdRowMapper(int id) {
+            String sql = "SELECT * FROM employee WHERE id = ?";
+            return jdbcTemplate.queryForObject(sql, new EmployeeMapper(), id);
+        }
+
+    @Override
+    public List<Employee> getAllRowMapper() {
+        String sql = "SELECT * FROM employee";
+        return jdbcTemplate.query(sql, new EmployeeMapper());
+    }
+
+//    Query row(s) with Direct Mapping
+    @Override
+    public Employee getByIdDirectMapper(int id) {
+        String sql = "SELECT * FROM employee WHERE id = ?";
+        return jdbcTemplate.queryForObject(sql, (rs, rowNum) -> new Employee(
+                rs.getInt("id"),
+                rs.getString("role"),
+                rs.getString("name")
+        ), id);
+    }
+
+//    Query row(s) with BeanPropertyMapper
+    @Override
+    public Employee getById(int id) {
+        return jdbcTemplate.queryForObject("SELECT * FROM employee WHERE id = ?",
+                new BeanPropertyRowMapper<>(Employee.class),
+                id
+        );
+    }
+
+    @Override
+    public List<Employee> getAll() {
+        return jdbcTemplate.query("SELECT * FROM employee",
+                new BeanPropertyRowMapper<>(Employee.class));
+
+    }
+
 }
